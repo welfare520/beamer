@@ -10,40 +10,33 @@
       <script src="/js/common.js"></script>
    </head>
    <body>
-      <p>Demo Page</p>
+      <br />
+      <div> Hello, ! Please select your beamer content </div>
+      <br />
       <div class="ui-widget ui-helper-clearfix">
- 
-      <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-        <li class="ui-widget-content ui-corner-tr">
-          <h5 class="ui-widget-header">Fashion</h5>
-          <img src="images/1.jpg" alt="The peaks of High Tatras" width="96" height="72">
-          <!-- <a href="images/1.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a> -->
-          <!-- <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a> -->
-        </li>
-        <li class="ui-widget-content ui-corner-tr">
-          <h5 class="ui-widget-header">Nike</h5>
-          <img src="images/2.jpg" alt="The chalet at the Green mountain lake" width="96" height="72">
-          <!-- <a href="images/2.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a> -->
-          <!-- <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a> -->
-        </li>
-        <li class="ui-widget-content ui-corner-tr">
-          <h5 class="ui-widget-header">Car</h5>
-          <img src="images/3.jpg" alt="Planning the ascent" width="96" height="72">
-          <!-- <a href="images/3.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a> -->
-          <!-- <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a> -->
-        </li>
-        <li class="ui-widget-content ui-corner-tr">
-          <h5 class="ui-widget-header">Health</h5>
-          <img src="images/4.jpg" alt="On top of Kozi kopka" width="96" height="72">
-          <!-- <a href="images/4.jpg" title="View larger image" class="ui-icon ui-icon-zoomin">View larger</a> -->
-          <!-- <a href="link/to/trash/script/when/we/have/js/off" title="Delete this image" class="ui-icon ui-icon-trash">Delete image</a> -->
-        </li>
-      </ul>
+      
+      
+        <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+          <% (1..11).each do |index| %> 
+          <li class="ui-widget-content ui-corner-tr">
+            <h5 class="ui-widget-header"><%=beamhash[index.to_s]%></h5>
+            <img src="images/<%=index%>.png" alt="The peaks of High Tatras" width="96" height="72">
+          </li>
+          <% end %>
+        </ul>
+        
        
-      <div id="trash" class="ui-widget-content ui-state-default">
-        <h4 class="ui-widget-header"><span class="ui-icon ui-icon-trash">Trash</span> Trash</h4>
+        <div id="selection" class="ui-widget-content ui-state-default">
+          <h4 class="ui-widget-header">My Beamer</h4>
+        </div>
       </div>
-       
+
+      <br /> 
+      <div> What else are you interested in? <br />
+      <textarea id="user-input" style="width:400px;height:120px;"></textarea>
       </div>
+         
+      
+      <button type="submit" id="button-user-input" class="submit-button">Submit</button>
    </body>
 </html>

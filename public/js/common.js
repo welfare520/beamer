@@ -1,8 +1,11 @@
+  $(function() {
+      $(".submit-button").button();
+  });
 
   $(function() {
     // there's the gallery and the trash
     var $gallery = $( "#gallery" ),
-      $trash = $( "#trash" );
+      $selection = $( "#selection" );
  
     // let the gallery items be draggable
     $( "li", $gallery ).draggable({
@@ -13,8 +16,8 @@
       cursor: "move"
     });
  
-    // let the trash be droppable, accepting the gallery items
-    $trash.droppable({
+    // let the selection be droppable, accepting the gallery items
+    $selection.droppable({
       accept: "#gallery > li",
       activeClass: "ui-state-highlight",
       drop: function( event, ui ) {
@@ -22,9 +25,9 @@
       }
     });
  
-    // let the gallery be droppable as well, accepting items from the trash
+    // let the gallery be droppable as well, accepting items from the selection
     $gallery.droppable({
-      accept: "#trash li",
+      accept: "#selection li",
       activeClass: "custom-state-active",
       drop: function( event, ui ) {
         recycleImage( ui.draggable );
@@ -32,14 +35,14 @@
     });
  
     // image deletion function
-    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-refresh'>Recycle image</a>";
+    var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='Recycle this image' class='ui-icon ui-icon-trash'>Recycle image</a>";
     function deleteImage( $item ) {
       $item.fadeOut(function() {
-        var $list = $( "ul", $trash ).length ?
-          $( "ul", $trash ) :
-          $( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $trash );
+        var $list = $( "ul", $selection ).length ?
+          $( "ul", $selection ) :
+          $( "<ul class='gallery ui-helper-reset'/>" ).appendTo( $selection );
  
-        $item.find( "a.ui-icon-trash" ).remove();
+        $item.find( "a.ui-icon-refresh" ).remove();
         $item.append( recycle_icon ).appendTo( $list ).fadeIn(function() {
           $item
             .animate({ width: "48px" })
@@ -50,15 +53,13 @@
     }
  
     // image recycle function
-    var trash_icon = "<a href='link/to/trash/script/when/we/have/js/off' title='Delete this image' class='ui-icon ui-icon-trash'>Delete image</a>";
     function recycleImage( $item ) {
       $item.fadeOut(function() {
         $item
-          .find( "a.ui-icon-refresh" )
+          .find( "a.ui-icon-trash" )
             .remove()
           .end()
           .css( "width", "96px")
-          .append( trash_icon )
           .find( "img" )
             .css( "height", "72px" )
           .end()
@@ -93,11 +94,11 @@
       var $item = $( this ),
         $target = $( event.target );
  
-      if ( $target.is( "a.ui-icon-trash" ) ) {
+      if ( $target.is( "a.ui-icon-refresh" ) ) {
         deleteImage( $item );
       } else if ( $target.is( "a.ui-icon-zoomin" ) ) {
         viewLargerImage( $target );
-      } else if ( $target.is( "a.ui-icon-refresh" ) ) {
+      } else if ( $target.is( "a.ui-icon-trash" ) ) {
         recycleImage( $item );
       }
  

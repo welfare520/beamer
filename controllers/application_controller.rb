@@ -41,10 +41,26 @@ class ApplicationController < Sinatra::Application
     namespace 'beamer' do
       get do
         run_with_error_handling {
-          erb :beamer
+          erb :beamer, :locals => {:beamhash => beamhash}
         }      
       end 
     end
+  end
+
+  def beamhash
+    {
+      "1" => "Bomb",
+      "2" => "Bowling",
+      "3" => "Car",
+      "4" => "Cup",
+      "5" => "Weight",
+      "6" => "Football",
+      "7" => "Business",
+      "8" => "Rocket",
+      "9" => "Sport",
+      "10" => "Shopping",
+      "11" => "Trash"
+    }    
   end
 end
 
