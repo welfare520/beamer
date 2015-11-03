@@ -1,0 +1,6 @@
+defaults: &defaults
+  user: beamer
+  pass: beamer 
+
+development:
+    <<: *defaults
