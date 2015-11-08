@@ -83,7 +83,7 @@ class ApplicationController < Sinatra::Application
           user = User.new(:id => uid)
           user.fetch_profile
           user.modify_profile(params[:tid], true)  
-          halt 201, {'status': 'tag added'}.to_json 
+          halt 201, {'status' => 'tag added'}.to_json 
         }
       end
 
@@ -92,7 +92,7 @@ class ApplicationController < Sinatra::Application
           user = User.new(:id => uid)
           user.fetch_profile
           user.modify_profile(params[:tid], false) 
-          halt 201, {'status': 'tag deleted'}.to_json 
+          halt 201, {'status' => 'tag deleted'}.to_json 
         }
       end
 
@@ -111,7 +111,7 @@ class ApplicationController < Sinatra::Application
           ensure
             FileUtils.remove_entry_secure dir
           end  
-          halt 201, {'status': 'comment added'}.to_json 
+          halt 201, {'status' => 'comment added'}.to_json 
         }
       end
     end
