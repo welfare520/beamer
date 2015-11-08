@@ -104,7 +104,7 @@ class ApplicationController < Sinatra::Application
           dir = Dir.mktmpdir
           begin
             File.open(dir +'/comment.txt', 'w') { |file| file.write(params[:comment]) }
-            output = `Rscript rscript/Beamer-analysis.R #{dir}/comment.txt`
+            output = `Rscript rscript/beamer-analysis.R #{dir}/comment.txt`
             (output.split(" ").drop(1)).each do |tag|
               user.modify_profile(tag.gsub!(/\A"|"\Z/, ''), true) 
             end
