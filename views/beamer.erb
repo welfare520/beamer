@@ -20,7 +20,7 @@
         <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">          
           <% showbeamer.each do |key, value| %>        
           <li class="ui-widget-content ui-corner-tr" value='<%=key%>'>
-            <h5 class="ui-widget-header"><%=value%></h5>
+            <h5 class="ui-widget-header"><%=value.to_s%></h5>
             <img src="images/<%=key%>.png" alt="The peaks of High Tatras" width="96" height="72">
           </li>
           <% end %>
@@ -31,7 +31,7 @@
           <ul class="gallery ui-helper-reset"> 
             <% userbeamer.each do |key, value| %>        
             <li class="ui-widget-content ui-corner-tr ui-beamer-user" value='<%=key%>'>
-              <h5 class="ui-widget-header"><%=value%></h5>
+              <h5 class="ui-widget-header"><%=value.to_s%></h5>
               <img src="images/<%=key%>.png" alt="The peaks of High Tatras" width="96" height="72">
             </li>
             <% end %>
@@ -47,7 +47,7 @@
       <br />
       <br />
       <div style="font-size:20px;display:inline-block;"> User-defined Tags: <br />
-        <p id='user-defined-tags'><% definebeamer.each do |value|%>  <%='#'+value%> &nbsp; <%end%> </p>
+        <p id='user-defined-tags'><% definebeamer.each do |value|%>  <%='#'+value.to_s%> &nbsp; <%end%> </p>
       </div>
    </body>
 </html>
