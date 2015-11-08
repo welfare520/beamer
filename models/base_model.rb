@@ -21,6 +21,12 @@ class BaseModel
                 .update_one(entry, { :upsert => true })
 		end		
 	end
+
+	def delete_one(hash)
+	    @@client[self.class.name.to_sym]
+		    .find(:id => hash["id"])
+		    .delete_one
+	end
  
 	def save_one(hash)
         @@client[self.class.name.to_sym]

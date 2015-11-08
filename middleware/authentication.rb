@@ -7,9 +7,12 @@ class Authentication < Sinatra::Application
   end                
 
   def call(env)     	
-    session_id = env["HTTP_COOKIE"].gsub("rack.session=","")   
-    request = Rack::Request.new(env)
-    env['rack.session.authentication'] = Sessions.new.session_valid?(session_id, request.params['uid']) ? true : false
+    session_id = env["rack.session"]
+    request = Rack::Request.new(env)    
+    if Sessions.new.session_valid?(session_id)
+    	env['rack.session.uid'] = Sessions.new.find_by_id(session_id)['user']
+    	env['rack.session.authentication'] = true 
+    end
     @app.call(env)
   end             
 end   

@@ -7,17 +7,21 @@ class Sessions < BaseModel
         save_one({"id" => session_id, "user"=>user, "time" => Time.now})
 	end
 
-	def session_valid?(session_id, user)
+	def session_valid?(session_id)
 		if find_by_id(session_id).nil?
             false 
 		elsif find_by_id(session_id)["time"] < Time.now - 3600
 			false 
-		elsif find_by_id(session_id)["user"] != user
-            false 
 		else
 			update_session(session_id)
 			true
 		end
+	end
+
+	def delete_session(user)
+        @@client[self.class.name.to_sym]
+	        .find(:user => user)
+	        .delete_many
 	end
 
 	def update_session(session_id)

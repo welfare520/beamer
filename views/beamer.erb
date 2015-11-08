@@ -11,32 +11,43 @@
    </head>
    <body>
       <br />
-      <div> Hello, ! Please select your beamer content </div>
+      <div style="font-size:20px;"> Hello <%=name%>, welcome to beamflix! Please select your beamer contents.</div>
+      <a href="/users/logout"> Log Out</a>
+      <br />
       <br />
       <div class="ui-widget ui-helper-clearfix">
       
-      
-        <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-          <% (1..11).each do |index| %> 
-          <li class="ui-widget-content ui-corner-tr">
-            <h5 class="ui-widget-header"><%=beamhash[index.to_s]%></h5>
-            <img src="images/<%=index%>.png" alt="The peaks of High Tatras" width="96" height="72">
+        <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">          
+          <% showbeamer.each do |key, value| %>        
+          <li class="ui-widget-content ui-corner-tr" value='<%=key%>'>
+            <h5 class="ui-widget-header"><%=value%></h5>
+            <img src="images/<%=key%>.png" alt="The peaks of High Tatras" width="96" height="72">
           </li>
           <% end %>
-        </ul>
-        
+        </ul>        
        
-        <div id="selection" class="ui-widget-content ui-state-default">
+        <div id="selection" class="ui-widget-content ui-state-default"> 
           <h4 class="ui-widget-header">My Beamer</h4>
+          <ul class="gallery ui-helper-reset"> 
+            <% userbeamer.each do |key, value| %>        
+            <li class="ui-widget-content ui-corner-tr ui-beamer-user" value='<%=key%>'>
+              <h5 class="ui-widget-header"><%=value%></h5>
+              <img src="images/<%=key%>.png" alt="The peaks of High Tatras" width="96" height="72">
+            </li>
+            <% end %>
+          </ul> 
         </div>
       </div>
 
-      <br /> 
-      <div> What else are you interested in? <br />
-      <textarea id="user-input" style="width:400px;height:120px;"></textarea>
-      </div>
-         
-      
+      <div style="font-size:20px;"> What else are you interested in? <br />
+      <textarea id="user-input" style="width:500px;height:60px;font-size:20px;"></textarea>
+      </div>    
       <button type="submit" id="button-user-input" class="submit-button">Submit</button>
+      </div> 
+      <br />
+      <br />
+      <div style="font-size:20px;display:inline-block;"> User-defined Tags: <br />
+        <p id='user-defined-tags'><% definebeamer.each do |value|%>  <%='#'+value%> &nbsp; <%end%> </p>
+      </div>
    </body>
 </html>
