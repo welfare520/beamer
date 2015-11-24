@@ -119,18 +119,19 @@ class ApplicationController < Sinatra::Application
 
   def beamhash
     {
-      "1" => "Bomb",
-      "2" => "Bowling",
-      "3" => "Car",
-      "4" => "Cup",
-      "5" => "Weight",
-      "6" => "Football",
-      "7" => "Business",
-      "8" => "Rocket",
-      "9" => "Sport",
-      "10" => "Shopping",
-      "11" => "Trash"
+      "bomb" => "Bomb",
+      "bowling" => "Bowling",
+      "car" => "Car",
+      "cup" => "Cup",
+      "weight" => "Weight",
+      "football" => "Football",
+      "business" => "Business",
+      "rocket" => "Rocket",
+      "sport" => "Sport",
+      "shopping" => "Shopping",
+      "trash" => "Trash"
     }    
   end
 end
 
+require_relative 'dashboard'
