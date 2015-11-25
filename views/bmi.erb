@@ -21,12 +21,12 @@
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script src="/js/bootstrap.min.js"></script>
+    <![endif]-->    
     <script src="/js/holder.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
     <script src="/js/bmi.js"></script>
   </head>
 
@@ -41,7 +41,7 @@
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Beamer Management</h1>
-          <button type="button" class="btn btn-default">Add new</button>
+          <button type="button" class="btn btn-default" id="add-beamer-button">Add new</button>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
@@ -53,20 +53,25 @@
                 </tr>
               </thead>
               <tbody>
-                 
+                <% beamers.each do |beamer| %>
                 <tr>
                   <form>
-                    <td headers="id">1,001</td>
-                    <td headers="name">Lorem</td>
-                    <td headers="tag">ipsum</td>
-                    <td headers="icon">dolor</td>
+                    <input name="beamer-id" value="<%=beamer["id"]%>" style="display:none"/>
+                    <input name="beamer-name" value="<%=beamer["name"]%>" style="display:none"/>
+                    <input name="beamer-tag" value="<%=beamer["tag"]%>" style="display:none"/>
+
+                    <td headers="id"><%=beamer["id"]%></td>
+                    <td headers="name"><%=beamer["name"]%></td>
+                    <td headers="tag"><%=beamer["tag"]%></td>
+                    <td headers="icon"><img src="/upload/icon/<%=beamer["id"]%>.jpg" 
+                      style="width:40px;height:40px;"></td>
                     <td>
                       <button type="button" class="button-edit-beamer btn btn-default">Edit</button>
-                      <button type="button" class="btn btn-default">Delete</button>
+                      <button type="button" class="button-delete-beamer btn btn-default">Delete</button>
                     </td>
                   </form>
                 </tr>
-
+                <% end %>
               </tbody>
             </table>
           </div>
@@ -77,14 +82,47 @@
 
     <div id="edit-beamer-dialog" title="Beamer editor" style="display:none">
       <p>Beamer details</p> 
-      <form enctype="multipart/form-data" class="dialog-form">
-        <div style="display: inline;">ID: </div>
+      <table width="100%">
+        <tr>
+          <td valign="top">
+            <form enctype="multipart/form-data" id="edit-beamer-form">
+              <div style="display: inline;">ID: </div> 
+              <input type="text" name="beamer-id" readonly size="20"/>
+              <p></p>
+              <div style="display: inline;">Name: </div>
+              <input type="text" name="beamer-name" size="20"/>
+              <p></p>
+              <div style="display: inline;">Tag: </div>
+              <input type="text" name="beamer-tag" size="20"/>
+              <p></p>
+              <button type="submit">Save modification</button>
+            </form>
+          </td>
+          <td valign="top" width="130">
+            <img src="" style="width:80px;height:80px;" id="icon-image">                      
+            <form enctype="multipart/form-data" >
+              <div style="display: inline;">Change icon: </div> 
+              <input class="icon-change" type="file"/> 
+              <p></p>
+            </form> 
+          </td>
+        </tr> 
+      </table>     
+    </div>
+
+    <div id="add-beamer-dialog" title="Beamer editor" style="display:none">
+      <p>New beamer</p> 
+      <form enctype="multipart/form-data" id="add-beamer-form">
+        <div style="display: inline;">ID: </div> 
+        <input type="text" name="beamer-id" value="<%=Random.rand(10000000000...99999999999).to_s%>" readonly size="20"/>
         <p></p>
         <div style="display: inline;">Name: </div>
-        <input type="text" name="beamer-name" value="test" size="25"/>
+        <input type="text" name="beamer-name" size="20"/>
         <p></p>
         <div style="display: inline;">Tag: </div>
-        <input type="text" name="beamer-tag" value="test" size="25"/>
+        <input type="text" name="beamer-tag" size="20"/>
+        <p></p>
+        <button type="submit">Add beamer</button>
       </form>
     </div>
 
